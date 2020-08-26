@@ -1,8 +1,13 @@
+const assert = require('assert');
+
+// const SettingsBill = require('../settings-bill');
+const settingsBill = require('../settings-bill');
+
 describe("SettingsBill widget",function(){
     describe("set Values",function(){
 
     it("should be able to set and get callCost", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         billWithSettingsONE.setCallCost(2.50);
 
         billWithSettingsONE.getCallCost("call");
@@ -10,7 +15,7 @@ describe("SettingsBill widget",function(){
 
     });
     it("should be able to set and get smsCost", function(){
-    let billWithSettingsTwo = SettingBills();
+    let billWithSettingsTwo = settingsBill();
     billWithSettingsTwo.setSmsCost(3.20);
 
     billWithSettingsTwo.getSmsCost("sms");
@@ -18,7 +23,7 @@ describe("SettingsBill widget",function(){
     })
 
     it("should be able to set and get smsCost and callcost", function(){
-        let billWithSettingsTwo = SettingBills();
+        let billWithSettingsTwo = settingsBill();
         billWithSettingsTwo.setSmsCost(2.20);
         billWithSettingsTwo.setCallCost(3.00);
     
@@ -28,7 +33,7 @@ describe("SettingsBill widget",function(){
         })
 
     it("should be able to set Warning Level", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         billWithSettingsONE.setWarningValue(20);
 
         assert.equal(billWithSettingsONE.getWarningValue(), 20)
@@ -36,7 +41,7 @@ describe("SettingsBill widget",function(){
     })
 
     it("should be able to set criical Level", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         billWithSettingsONE.setCriticalValue(30);
         
         assert.equal(billWithSettingsONE.getCriticalValues(), 30)
@@ -44,7 +49,7 @@ describe("SettingsBill widget",function(){
     })
 
     it("should be able to set warning and criical Level", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         billWithSettingsONE.setWarningValue(23);
         billWithSettingsONE.setCriticalValue(40);
         
@@ -56,7 +61,7 @@ describe("SettingsBill widget",function(){
     describe("use Values",function(){
 
     it("should be able to calculate calls", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         
         billWithSettingsONE.setCriticalValue(30);
         billWithSettingsONE.setCallCost(2.50);
@@ -74,7 +79,7 @@ describe("SettingsBill widget",function(){
     })
 
     it("should be able to calculate sms", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         
         billWithSettingsONE.setCriticalValue(30);
         billWithSettingsONE.setCallCost(2.50);
@@ -92,7 +97,7 @@ describe("SettingsBill widget",function(){
     })
 
     it("should be able to calculate toatal of sms and callss", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         
         billWithSettingsONE.setCriticalValue(30);
         billWithSettingsONE.setCallCost(2.50);
@@ -112,7 +117,7 @@ describe("SettingsBill widget",function(){
 describe("use Colours",function(){
 
     it("should return the class name warning if warning level is reached", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         
         billWithSettingsONE.setCriticalValue(30);
         billWithSettingsONE.setWarningValue(10);
@@ -135,7 +140,7 @@ describe("use Colours",function(){
     })
 
     it("should return the class name danger if critical level is reached", function(){
-        let billWithSettingsONE = SettingBills();
+        let billWithSettingsONE = settingsBill();
         
         billWithSettingsONE.setCriticalValue(20);
         billWithSettingsONE.setWarningValue(10);
@@ -167,4 +172,3 @@ describe("use Colours",function(){
 
 })
 })
-

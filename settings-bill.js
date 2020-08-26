@@ -1,4 +1,4 @@
-function SettingBills() {
+module.exports = function settingBill() {
     var smsTotal2 = 0;
     var callTotal2 = 0;
     var callCostSet = 0;
@@ -9,6 +9,7 @@ function SettingBills() {
     function setCallCost(callCost) {
         callTotal2 = callCost;
     }
+    
     function getCallCost() {
         return callTotal2;
     }
@@ -75,6 +76,15 @@ function SettingBills() {
           }
     }
 
+    function getSettings() {
+        return {
+            callTotal2,
+            smsTotal2,
+            warningLevel,
+            criticalLevel
+        }
+    }
+
     return {
         callOrSms,
         setCallCost,
@@ -92,6 +102,7 @@ function SettingBills() {
         // sendSms,
         hasReachedCriticaLevel,
         totalClassName,
+        getSettings
     }
 
 }
