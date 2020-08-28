@@ -1,10 +1,10 @@
 module.exports = function settingBill() {
-    var smsTotal2 = 0;
-    var callTotal2 = 0;
-    var callCostSet = 0;
-    var smsCostSet = 0;
-    var warningLevel = 0;
-    var criticalLevel = 0;
+    let smsTotal2 = 0;
+    let callTotal2 = 0;
+    let callCostSet = 0;
+    let smsCostSet = 0;
+    let warningLevel = 0;
+    let criticalLevel = 0;
     
     function setCallCost(callCost) {
         callTotal2 = callCost;
@@ -69,20 +69,11 @@ module.exports = function settingBill() {
 
     function callOrSms(type) {
         if (type === "call") {
-            makeCalls();
+            return callCostSet += callTotal2;
           }
           else if (type === "sms") {
-            sendSms();
+            return smsCostSet += smsTotal2;
           }
-    }
-
-    function getSettings() {
-        return {
-            callTotal2,
-            smsTotal2,
-            warningLevel,
-            criticalLevel
-        }
     }
 
     return {
@@ -95,14 +86,13 @@ module.exports = function settingBill() {
         getCriticalValues,
         setWarningValue,
         getWarningValue,
-        // makeCalls,
+        //makeCalls,
         getTotalCost,
         getTotalCallCost,
         getTotalSmsCost,
-        // sendSms,
+        //sendSms,
         hasReachedCriticaLevel,
-        totalClassName,
-        getSettings
+        totalClassName
     }
 
 }
