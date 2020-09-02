@@ -40,27 +40,27 @@ app.get('/', function (req, res) {
     //console.log(settingBill.getCallCost())
 })
 app.post('/setting', function (req, res) {      
-    settingBill.setCallCost({
-        callCost: req.body.callCost          
-    })
+    settingBill.setCallCost( 
+         req.body.callCost  
+    )
 
-    settingBill.setSmsCost({
-        smsCost: req.body.smsCost
-    })
+    settingBill.setSmsCost(
+        req.body.smsCost
+    )
 
-    settingBill.setWarningValue({
-        theWarninglevel: req.body.theWarninglevel
-    })
+    settingBill.setWarningValue(
+     req.body.theWarninglevel
+    )
 
-    settingBill.setCriticalValue({
-        theCriticallevel: req.body.theCriticallevel
-    })
-
+    settingBill.setCriticalValue(
+     req.body.theCriticallevel
+    )
+ 
     res.redirect('/')         
 })
 
 app.post('/action', function (req, res) {
-    // capture the bill type
+    // // capture the bill type
     settingBill.callOrSms (req.body.actionType)
     
     console.log(req.body.actionType)
@@ -68,9 +68,15 @@ app.post('/action', function (req, res) {
 })
 
 app.get('/actions', function (req, res) {
+    res.render("actions",{
+        actions:settingBill.actions()
+    
+    })
 
 })
 app.get('/actions/:type', function (req, res) {
+    const actionType = req.params.actionType
+    res.render("actions",{actions:settingBill.actionsFor(actionType) })
 
 })
 
