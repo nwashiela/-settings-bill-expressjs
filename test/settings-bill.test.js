@@ -156,7 +156,7 @@ describe("use Colours",function(){
         billWithSettingsONE.callOrSms('call');            //15.50
         billWithSettingsONE.callOrSms('call');            //18
         billWithSettingsONE.callOrSms('call');            //20.50
-        billWithSettingsONE.callOrSms('call');            // this one is ignored...
+        // billWithSettingsONE.callOrSms('call');            // this one is ignored...
 
 
 
