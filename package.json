@@ -7,7 +7,7 @@
     "test": "mocha"
   },
   "directories": {
-"test":"test"
+    "test": "test"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,8 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "moment": "^2.27.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.1.3"
   }
 }
