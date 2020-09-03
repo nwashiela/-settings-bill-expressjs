@@ -1,15 +1,18 @@
-const express = require('express')             
+const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-const SettingBill = require('./settings-bill') 
-const app = express()                   
-const settingBill = SettingBill()        
+const SettingBill = require('./settings-bill')
+const app = express()
+const settingBill = SettingBill()
+
+const moment = require('moment')
+moment().format()
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 // parse application/x-www-form-urlencoded          
-app.use(bodyParser.urlencoded({ extended: false }))   
+app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json                               
 app.use(bodyParser.json())
 
@@ -23,11 +26,11 @@ app.get('/', function (req, res) {
     const warning = settingBill.getWarningValue()
     const critical = settingBill.getCriticalValues()
 
-    const callTotal =settingBill.getTotalCallCost()
+    const callTotal = settingBill.getTotalCallCost()
     const smsTotal = settingBill.getTotalSmsCost()
     const grandTotal = settingBill.getTotalCost()
-
-    res.render('index', {       
+    const color = settingBill.totalClassName()
+    res.render('index', {
         call,
         sms,
         critical,
@@ -35,13 +38,15 @@ app.get('/', function (req, res) {
 
         callTotal,
         smsTotal,
-        grandTotal
+        grandTotal,
+        color
+   
     })
     //console.log(settingBill.getCallCost())
 })
-app.post('/setting', function (req, res) {      
-    settingBill.setCallCost( 
-         req.body.callCost  
+app.post('/setting', function (req, res) {
+    settingBill.setCallCost(
+        req.body.callCost
     )
 
     settingBill.setSmsCost(
@@ -49,35 +54,51 @@ app.post('/setting', function (req, res) {
     )
 
     settingBill.setWarningValue(
-     req.body.theWarninglevel
+        req.body.theWarninglevel
     )
 
     settingBill.setCriticalValue(
-     req.body.theCriticallevel
+        req.body.theCriticallevel
     )
- 
-    res.redirect('/')         
+
+    res.redirect('/')
 })
 
 app.post('/action', function (req, res) {
     // // capture the bill type
-    settingBill.callOrSms (req.body.actionType)
-    
-    console.log(req.body.actionType)
+    settingBill.callOrSms(req.body.actionType)
+
+
     res.redirect('/')
 })
 
 app.get('/actions', function (req, res) {
-    res.render("actions",{
-        actions:settingBill.actions()
-    
+    const actionsList = settingBill.actions()
+    for (var key of actionsList) {
+
+        key.timestamp = moment(key.timestamp).fromNow()
+    }
+
+    res.render("actions", {
+        actions: actionsList
+
     })
 
 })
 app.get('/actions/:type', function (req, res) {
-    const actionType = req.params.actionType
-    res.render("actions",{actions:settingBill.actionsFor(actionType) })
+    const actionType = req.params.type
+    const actionsList = settingBill.actions(actionType)
+    for (var key of actionsList) {
 
+        key.timestamp = moment(key.timestamp).fromNow()
+    }
+
+
+    // res.render("actions",{actions:settingBill.actionsFor(actionType) })
+    res.render("actions", {
+        actions: actionsList
+
+    })
 })
 
 const PORT = process.env.PORT || 3011;

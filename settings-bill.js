@@ -1,10 +1,10 @@
 module.exports = function settingBill() {
-    let smsTotal2 = 0;
-    let callTotal2 = 0;
+    let smsTotal2;
+    let callTotal2;
     let callCostSet = 0;
     let smsCostSet = 0;
-    let warningLevel = 0;
-    let criticalLevel = 0;
+    let warningLevel;
+    let criticalLevel;
     
     let actionsList =[]
         function setCallCost(callCost) {
@@ -23,14 +23,14 @@ module.exports = function settingBill() {
     }
 
     function setCriticalValue(theCriticallevel) {
-        criticalLevel = theCriticallevel;
+        criticalLevel =Number(theCriticallevel);
     }
     function getCriticalValues() {
         return criticalLevel;
     }
 
     function setWarningValue(theWarninglevel) {
-        warningLevel = theWarninglevel;
+        warningLevel = Number(theWarninglevel);
     }
     function getWarningValue() {
         return warningLevel
