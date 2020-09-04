@@ -5,12 +5,12 @@ module.exports = function settingBill() {
     let smsCostSet = 0;
     let warningLevel;
     let criticalLevel;
-    
-    let actionsList =[]
-        function setCallCost(callCost) {
+
+    let actionsList = []
+    function setCallCost(callCost) {
         callTotal2 = Number(callCost);
     }
-    
+
     function getCallCost() {
         return callTotal2;
     }
@@ -23,7 +23,7 @@ module.exports = function settingBill() {
     }
 
     function setCriticalValue(theCriticallevel) {
-        criticalLevel =Number(theCriticallevel);
+        criticalLevel = Number(theCriticallevel);
     }
     function getCriticalValues() {
         return criticalLevel;
@@ -69,31 +69,31 @@ module.exports = function settingBill() {
     }
 
     function callOrSms(type) {
-        var cost =0;
+        var cost = 0;
         if (type === "call") {
             callCostSet += callTotal2;
-            cost =callTotal2
-          }
-          else if (type === "sms") {
+            cost = callTotal2
+        }
+        else if (type === "sms") {
             smsCostSet += smsTotal2;
             cost = smsTotal2;
-          }
-          actionsList.push({
+        }
+        actionsList.push({
             type,
             cost,
-    timestamp : new Date()
-    
-            
+            timestamp: new Date()
+
+
         });
     }
 
-    
-    function actions(){
 
-    return actionsList
+    function actions() {
+
+        return actionsList
     }
 
-    function actionsFor(type){
+    function actionsFor(type) {
         const filteredActions = [];
 
         // loop through all the entries in the action list 

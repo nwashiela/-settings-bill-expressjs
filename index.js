@@ -6,9 +6,16 @@ const app = express()
 const settingBill = SettingBill()
 
 const moment = require('moment')
-moment().format()
+//moment().startOf('hour').fromNow();
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({
+    defaultLayout: 'main',
+    helpers: {
+        "timestamp": function () {
+            return moment(this.timestamp).fromNow();
+        }
+    }
+}))
 app.set('view engine', 'handlebars')
 
 // parse application/x-www-form-urlencoded          
@@ -74,7 +81,7 @@ app.post('/action', function (req, res) {
 
 app.get('/actions', function (req, res) {
     const actionsList = settingBill.actions()
-    for (var key of actionsList) {
+    for (var key = 0; key < actionsList.length; key++) {
 
         key.timestamp = moment(key.timestamp).fromNow()
     }
@@ -107,3 +114,4 @@ app.listen(PORT, function () {
 
     console.log("App started at port:", PORT)
 })
+
