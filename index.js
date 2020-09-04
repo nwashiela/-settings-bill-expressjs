@@ -87,7 +87,7 @@ app.get('/actions', function (req, res) {
 })
 app.get('/actions/:type', function (req, res) {
     const actionType = req.params.type
-    const actionsList = settingBill.actions(actionType)
+    const actionsList = settingBill.actionsFor(actionType)
     for (var key of actionsList) {
 
         key.timestamp = moment(key.timestamp).fromNow()
